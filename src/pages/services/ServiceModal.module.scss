@@ -1,0 +1,458 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(59, 42, 44, 0.45);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  animation: fadeIn 0.18s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal {
+  background: $color-surface;
+  border-radius: $border-radius-card;
+  border: 1px solid $color-border;
+  box-shadow: 0 20px 50px rgba(59, 42, 44, 0.18);
+  width: 100%;
+  max-width: 540px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+  animation: slideUp 0.22s ease-out;
+
+  @include mobile {
+    max-width: 100%;
+    border-radius: 14px;
+  }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 24px 28px 16px;
+  border-bottom: 1px solid rgba(232, 212, 215, 0.6);
+}
+
+.title {
+  font-family: $font-serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: $color-dark;
+  margin: 0;
+}
+
+.subtitle {
+  font-family: $font-sans;
+  font-size: 13px;
+  color: $color-secondary-text;
+  margin: 4px 0 0 0;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  color: $color-muted;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s;
+
+  &:hover {
+    background: $color-rose-light;
+    color: $color-dark;
+  }
+}
+
+.tabBar {
+  display: flex;
+  padding: 12px 28px 0;
+  gap: 8px;
+  border-bottom: 1px solid rgba(232, 212, 215, 0.4);
+}
+
+.tabBtn {
+  background: none;
+  border: none;
+  font-family: $font-sans;
+  font-size: 14px;
+  font-weight: 500;
+  color: $color-secondary-text;
+  padding: 8px 14px 12px;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.15s;
+
+  &:hover {
+    color: $color-dark;
+  }
+}
+
+.tabActive {
+  color: $color-rose-dark;
+  font-weight: 600;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2.5px;
+    background: $color-rose-primary;
+    border-radius: 2px 2px 0 0;
+  }
+}
+
+.errorBanner {
+  margin: 16px 28px 0;
+  padding: 10px 14px;
+  background: #FFF1F2;
+  border: 1px solid #FECDD3;
+  border-radius: 8px;
+  color: #BE123C;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.form {
+  padding: 20px 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-family: $font-sans;
+  font-size: 13px;
+  font-weight: 600;
+  color: $color-dark;
+}
+
+.required {
+  color: #E11D48;
+}
+
+.input {
+  @include input-base;
+  height: 44px;
+  font-size: 14px;
+}
+
+.inputError {
+  border-color: #E11D48 !important;
+  background: #FFF5F5 !important;
+}
+
+.errorText {
+  font-family: $font-sans;
+  font-size: 12px;
+  color: #E11D48;
+  margin: 4px 0 0 0;
+}
+
+.imageUploadArea {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 12px;
+  background: $color-rose-lighter;
+  border: 1.5px dashed $color-border;
+  border-radius: 12px;
+}
+
+.imagePreviewWrap {
+  width: 76px;
+  height: 76px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.imagePreview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.previewFallback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: $color-rose-primary;
+}
+
+.fallbackLabel {
+  font-size: 10px;
+  color: $color-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.uploadControls {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fileLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: $color-surface;
+  color: $color-dark;
+  font-family: $font-sans;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 7px 14px;
+  border-radius: 8px;
+  border: 1px solid $color-border;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  width: fit-content;
+
+  &:hover {
+    background: $color-rose-light;
+    border-color: $color-rose-primary;
+  }
+}
+
+.hiddenFileInput {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.helperText {
+  font-family: $font-sans;
+  font-size: 12px;
+  color: $color-muted;
+  margin: 0;
+}
+
+.toggleRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.toggleSwitch {
+  width: 46px;
+  height: 26px;
+  border-radius: 13px;
+  background: #D1D5DB;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.2s;
+  padding: 0;
+}
+
+.toggleOn {
+  background: #10B981;
+}
+
+.toggleOff {
+  background: #D1D5DB;
+}
+
+.toggleKnob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toggleOn .toggleKnob {
+  transform: translateX(20px);
+}
+
+.toggleText {
+  font-family: $font-sans;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.statusActive {
+  color: #065F46;
+}
+
+.statusInactive {
+  color: $color-muted;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 8px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(232, 212, 215, 0.6);
+}
+
+.cancelBtn {
+  background: none;
+  border: 1px solid $color-border;
+  border-radius: 8px;
+  padding: 9px 18px;
+  font-family: $font-sans;
+  font-size: 14px;
+  font-weight: 500;
+  color: $color-secondary-text;
+  cursor: pointer;
+  transition: background 0.15s;
+
+  &:hover:not(:disabled) {
+    background: $color-rose-lighter;
+    color: $color-dark;
+  }
+}
+
+.submitBtn {
+  background: $color-rose-primary;
+  border: none;
+  border-radius: 8px;
+  padding: 9px 22px;
+  font-family: $font-sans;
+  font-size: 14px;
+  font-weight: 600;
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover:not(:disabled) {
+    background: $color-rose-dark;
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+
+  &:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+  }
+}
+
+.btnLoading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #FFFFFF;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.csvSection {
+  padding: 20px 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.csvDropZone {
+  padding: 28px 20px;
+  border: 2px dashed $color-border;
+  border-radius: 12px;
+  background: $color-rose-lighter;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.csvPrompt {
+  font-family: $font-sans;
+  font-size: 14px;
+  color: $color-secondary-text;
+  max-width: 340px;
+  margin: 0;
+}
+
+.selectedFile {
+  font-size: 13px;
+  color: $color-dark;
+  margin: 4px 0 0;
+}
+
+.progressBarWrapper {
+  width: 100%;
+  height: 20px;
+  background: $color-rose-lighter;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.progressBar {
+  height: 100%;
+  background: $color-rose-primary;
+  transition: width 0.2s ease;
+}
+
+.progressText {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: $color-dark;
+}

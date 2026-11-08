@@ -1,0 +1,1021 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+.adminHome {
+  padding-bottom: 40px;
+}
+
+// ── Header Actions ────────────────────────────────────────────────
+.refreshBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background: #ffffff;
+  color: $text-dark;
+  border: 1px solid rgba(216, 164, 169, 0.45);
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(216, 164, 169, 0.12);
+
+  &:hover {
+    background: #FFF0F5;
+    border-color: $color-pink-dark;
+    color: $color-pink-dark;
+    transform: translateY(-1px);
+  }
+
+  .spinning {
+    animation: spin 1s linear infinite;
+  }
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// ── Generic Card Styles ───────────────────────────────────────────
+.card {
+  background: #ffffff;
+  border: 1px solid rgba(216, 164, 169, 0.35);
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 4px 18px rgba(216, 164, 169, 0.08);
+  transition: all 0.25s ease;
+
+  @media (max-width: 768px) {
+    padding: 18px;
+  }
+}
+
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(216, 164, 169, 0.2);
+}
+
+.cardTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: $text-dark;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  svg {
+    color: $color-pink-dark;
+    font-size: 19px;
+  }
+}
+
+.cardSubtitle {
+  font-size: 12.5px;
+  color: $text-muted;
+  margin: 4px 0 0 0;
+}
+
+.cardLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: $color-pink-dark;
+  text-decoration: none;
+  padding: 5px 12px;
+  border-radius: 8px;
+  background: #FFF0F5;
+  border: 1px solid rgba(216, 164, 169, 0.3);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+
+  &:hover {
+    background: $color-pink-dark;
+    color: #ffffff;
+  }
+}
+
+// ── 1. Top KPI Grid ───────────────────────────────────────────────
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 24px;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  @media (max-width: 540px) {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+
+.statCard {
+  background: #ffffff;
+  border: 1px solid rgba(216, 164, 169, 0.35);
+  border-radius: 16px;
+  padding: 22px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  box-shadow: 0 4px 18px rgba(216, 164, 169, 0.08);
+  transition: all 0.25s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(216, 164, 169, 0.16);
+    border-color: rgba(216, 164, 169, 0.6);
+  }
+}
+
+.statIconWrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: #FFF0F5;
+  color: $color-pink-dark;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+  border: 1px solid rgba(216, 164, 169, 0.3);
+}
+
+.statIconPending {
+  background: #FFF8E7;
+  color: #B7791F;
+  border-color: rgba(221, 165, 45, 0.35);
+}
+
+.statIconUpcoming {
+  background: #EBF8FF;
+  color: #2B6CB0;
+  border-color: rgba(66, 153, 225, 0.35);
+}
+
+.statIconServices {
+  background: #F0FFF4;
+  color: #276749;
+  border-color: rgba(72, 187, 120, 0.35);
+}
+
+.statInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.statLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: $text-muted;
+  margin: 0 0 4px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.statValue {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: $text-dark;
+  margin: 0 0 2px 0;
+  line-height: 1.1;
+}
+
+.statSubtext {
+  font-size: 12px;
+  color: $text-muted;
+  margin: 0;
+}
+
+// ── 2. Analytics Row (Activity Trends & Status Donut) ─────────────
+.analyticsRow {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 22px;
+  margin-bottom: 26px;
+
+  @media (max-width: 1050px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.trendCard {
+  position: relative;
+}
+
+.graphWrapper {
+  position: relative;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.trendSvg {
+  width: 100%;
+  height: 200px;
+  overflow: visible;
+}
+
+.gridLine {
+  stroke: rgba(216, 164, 169, 0.2);
+  stroke-dasharray: 4 4;
+}
+
+.gridLineBase {
+  stroke: rgba(216, 164, 169, 0.35);
+}
+
+.axisText {
+  font-size: 10px;
+  fill: $text-muted;
+  font-family: inherit;
+}
+
+.xAxisLabel {
+  font-size: 10.5px;
+  fill: $text-muted;
+  font-weight: 500;
+}
+
+.chartPoint {
+  fill: #ffffff;
+  stroke: $color-pink-dark;
+  stroke-width: 2.5;
+  cursor: pointer;
+  transition: r 0.15s ease, stroke-width 0.15s ease;
+
+  &:hover {
+    fill: $color-pink-dark;
+    stroke: #ffffff;
+    stroke-width: 2;
+  }
+}
+
+.pointHovered {
+  fill: $color-pink-dark !important;
+  stroke: #ffffff !important;
+  stroke-width: 2 !important;
+}
+
+.trendTooltip {
+  position: absolute;
+  transform: translate(-50%, -120%);
+  background: #ffffff;
+  border: 1px solid rgba(216, 164, 169, 0.45);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 11.5px;
+  color: $text-dark;
+  box-shadow: 0 4px 14px rgba(216, 164, 169, 0.2);
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 10;
+
+  strong {
+    display: block;
+    color: $color-pink-dark;
+    margin-bottom: 2px;
+  }
+}
+
+.tooltipBreakdown {
+  display: flex;
+  gap: 6px;
+  font-size: 10.5px;
+  color: $text-muted;
+  margin-top: 3px;
+
+  span {
+    white-space: nowrap;
+  }
+}
+
+// ── Donut Chart ───────────────────────────────────────────────────
+.donutCard {
+  display: flex;
+  flex-direction: column;
+}
+
+.donutBody {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 8px 0;
+  flex: 1;
+
+  @media (max-width: 500px) {
+    flex-direction: column;
+  }
+}
+
+.donutSvgWrap {
+  width: 150px;
+  height: 150px;
+  flex-shrink: 0;
+  position: relative;
+  margin: 0 auto;
+}
+
+.donutSvg {
+  width: 100%;
+  height: 100%;
+}
+
+.donutSegment {
+  cursor: pointer;
+  transition: stroke-width 0.2s ease, opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.donutCenterVal {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 700;
+  fill: $text-dark;
+}
+
+.donutCenterLabel {
+  font-size: 11px;
+  fill: $text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.donutLegend {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: #FFFDFE;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  cursor: pointer;
+
+  &:hover,
+  &Active {
+    background: #FFF0F5;
+    border-color: rgba(216, 164, 169, 0.35);
+  }
+}
+
+.legendColorDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legendInfo {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.legendLabel {
+  font-size: 12px;
+  color: $text-dark;
+  font-weight: 500;
+}
+
+.legendCount {
+  font-size: 12px;
+  font-weight: 600;
+  color: $text-dark;
+
+  small {
+    color: $text-muted;
+    font-weight: 400;
+    margin-left: 2px;
+  }
+}
+
+// ── 3. Popular Salon Services (Full-Width Balanced Grid) ──────────
+.servicesCardFull {
+  margin-bottom: 26px;
+}
+
+.serviceRankingGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px 24px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+
+.rankingRow {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rankingMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rankingHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rankingRank {
+  font-size: 11px;
+  font-weight: 700;
+  color: $color-pink-dark;
+  background: #FFF0F5;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  border: 1px solid rgba(216, 164, 169, 0.3);
+}
+
+.rankingName {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: $text-dark;
+}
+
+.rankingStats {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+}
+
+.rankingCount {
+  font-weight: 600;
+  color: $text-dark;
+}
+
+.rankingPercentage {
+  color: $text-muted;
+  font-size: 11.5px;
+}
+
+.rankingBarTrack {
+  width: 100%;
+  height: 8px;
+  background: #FFF0F5;
+  border-radius: 9999px;
+  overflow: hidden;
+  border: 1px solid rgba(216, 164, 169, 0.15);
+}
+
+.rankingBarFill {
+  height: 100%;
+  background: linear-gradient(90deg, #D8A4A9, #B07A80);
+  border-radius: 9999px;
+  transition: width 0.4s ease;
+}
+
+// ── 4. Interactive Calendar Section ───────────────────────────────
+.calendarSectionCard {
+  margin-bottom: 20px;
+}
+
+.calendarSectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(216, 164, 169, 0.25);
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.calNavControls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.calCurrentMonthLabel {
+  font-family: 'Playfair Display', serif;
+  font-size: 16.5px;
+  font-weight: 700;
+  color: $text-dark;
+  min-width: 145px;
+  text-align: center;
+  letter-spacing: 0.3px;
+}
+
+.calNavBtn {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: #FFF5F7;
+  border: 1.5px solid rgba(176, 122, 128, 0.45);
+  color: #3B2A2C;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(216, 164, 169, 0.18);
+  transition: all 0.2s ease;
+
+  svg {
+    stroke-width: 2.6;
+  }
+
+  &:hover {
+    background: #B07A80;
+    border-color: #B07A80;
+    color: #ffffff;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(176, 122, 128, 0.3);
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
+}
+
+.calTodayBtn {
+  padding: 6px 14px;
+  background: #FFF0F5;
+  border: 1px solid rgba(216, 164, 169, 0.35);
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: $color-pink-dark;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: $color-pink-dark;
+    color: #ffffff;
+  }
+}
+
+.calendarLayoutGrid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 24px;
+
+  @media (max-width: 1050px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.calendarGridContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.weekdayHeaderRow {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.weekdayHeaderCell {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: $text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 6px 0;
+}
+
+.daysGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.dayCell {
+  background: #ffffff;
+  border: 1px solid rgba(216, 164, 169, 0.25);
+  border-radius: 12px;
+  padding: 8px;
+  min-height: 72px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #FFF8FA;
+    border-color: rgba(216, 164, 169, 0.6);
+    transform: translateY(-1px);
+  }
+}
+
+.dayCellOtherMonth {
+  opacity: 0.42;
+  background: #FAF8F8;
+}
+
+.dayCellToday {
+  border-color: $color-pink-dark !important;
+  background: #FFFDFE;
+  box-shadow: 0 0 0 1px $color-pink-dark inset;
+}
+
+.dayCellSelected {
+  background: #FFF0F5 !important;
+  border-color: $color-pink-dark !important;
+  box-shadow: 0 3px 10px rgba(176, 122, 128, 0.2) !important;
+
+  .dayNum {
+    color: $color-pink-dark !important;
+    font-weight: 700 !important;
+  }
+}
+
+.dayCellHasBookings {
+  border-color: rgba(216, 164, 169, 0.5);
+}
+
+.dayCellTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dayNum {
+  font-size: 13px;
+  font-weight: 500;
+  color: $text-dark;
+}
+
+.todayIndicator {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: $color-pink-dark;
+  background: #FFF0F5;
+  padding: 1px 4px;
+  border-radius: 4px;
+}
+
+.dayBookingMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.statusDotsRow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.statusDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dotConfirmed {
+  background: #2B6CB0;
+}
+
+.dotPending {
+  background: #D97706;
+}
+
+.dotCompleted {
+  background: #16A34A;
+}
+
+.dotCancelled {
+  background: #C53030;
+}
+
+.bookingCountBadge {
+  font-size: 10px;
+  color: $color-pink-dark;
+  font-weight: 600;
+  background: #FFF0F5;
+  padding: 1px 5px;
+  border-radius: 4px;
+  align-self: flex-start;
+  white-space: nowrap;
+}
+
+.calendarStatusLegend {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(216, 164, 169, 0.2);
+  flex-wrap: wrap;
+}
+
+.legendPill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  color: $text-muted;
+}
+
+// ── Selected Date Schedule Panel ──────────────────────────────────
+.selectedSchedulePanel {
+  background: #FFF8FA;
+  border: 1px solid rgba(216, 164, 169, 0.35);
+  border-radius: 14px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  max-height: 520px;
+  overflow-y: auto;
+}
+
+.scheduleHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(216, 164, 169, 0.25);
+}
+
+.scheduleDateTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: $text-dark;
+  margin: 0;
+}
+
+.scheduleSub {
+  font-size: 12px;
+  color: $text-muted;
+  margin: 2px 0 0 0;
+}
+
+.scheduleBookingBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffff;
+  background: linear-gradient(135deg, #D8A4A9, #B07A80);
+  border: none;
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(176, 122, 128, 0.25);
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(176, 122, 128, 0.35);
+  }
+}
+
+.scheduleList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.scheduleItemCard {
+  background: #ffffff;
+  border: 1px solid rgba(216, 164, 169, 0.3);
+  border-radius: 12px;
+  padding: 12px 14px;
+  box-shadow: 0 2px 8px rgba(216, 164, 169, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.itemCardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.itemServiceName {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: $text-dark;
+}
+
+.itemSlotTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: $text-muted;
+  background: #FFF0F5;
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+.itemClientRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 6px;
+  border-top: 1px solid rgba(216, 164, 169, 0.15);
+}
+
+.itemClientInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.itemClientName {
+  font-size: 12px;
+  font-weight: 600;
+  color: $text-dark;
+}
+
+.itemClientPhone {
+  font-size: 11px;
+  color: $text-muted;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.scheduleEmpty {
+  padding: 36px 16px;
+  text-align: center;
+  color: $text-muted;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  h5 {
+    font-size: 14px;
+    font-weight: 600;
+    color: $text-dark;
+    margin: 10px 0 4px 0;
+  }
+
+  p {
+    font-size: 12px;
+    margin: 0;
+    max-width: 220px;
+    line-height: 1.4;
+  }
+}
+
+.scheduleEmptyIcon {
+  font-size: 28px;
+  color: #D8A4A9;
+}
+
+.emptyAddBtn {
+  margin-top: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: $color-pink-dark;
+  background: #FFF0F5;
+  border: 1px solid rgba(216, 164, 169, 0.35);
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: $color-pink-dark;
+    color: #ffffff;
+  }
+}
+
+// ── Badges ────────────────────────────────────────────────────────
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badgeRequested {
+  background: #FFF8E7;
+  color: #B7791F;
+  border: 1px solid rgba(221, 165, 45, 0.4);
+}
+
+.badgeConfirmed {
+  background: #EBF8FF;
+  color: #2B6CB0;
+  border: 1px solid rgba(66, 153, 225, 0.4);
+}
+
+.badgeCompleted {
+  background: #F0FFF4;
+  color: #276749;
+  border: 1px solid rgba(72, 187, 120, 0.4);
+}
+
+.badgeCancelled {
+  background: #FFF5F5;
+  color: #C53030;
+  border: 1px solid rgba(229, 62, 62, 0.4);
+}
+
+// ── Empty & Loading States ────────────────────────────────────────
+.chartEmpty {
+  padding: 36px 20px;
+  text-align: center;
+  color: $text-muted;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    font-size: 32px;
+    color: #D8A4A9;
+    margin-bottom: 8px;
+  }
+
+  p {
+    margin: 0;
+    font-size: 13.5px;
+  }
+}
+
+.loadingBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px;
+  color: $text-muted;
+  gap: 12px;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(216, 164, 169, 0.3);
+  border-top-color: $color-pink-dark;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.errorBanner {
+  background: #FFF5F5;
+  border: 1px solid #FEB2B2;
+  color: #C53030;
+  padding: 12px 16px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

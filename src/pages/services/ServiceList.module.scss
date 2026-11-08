@@ -1,0 +1,596 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.headerBtn {
+  background: $color-rose-primary;
+  color: #FFFFFF;
+  border: none;
+  border-radius: $border-radius-button;
+  padding: 10px 20px;
+  font-family: $font-sans;
+  font-size: 14px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 2px 6px rgba(216, 164, 169, 0.3);
+
+  &:hover {
+    background: $color-rose-dark;
+    box-shadow: 0 4px 10px rgba(216, 164, 169, 0.4);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  @include mobile {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.statsBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.statsChips {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.statChip {
+  font-family: $font-sans;
+  font-size: 13px;
+  color: $color-secondary-text;
+  background: $color-surface;
+  padding: 6px 14px;
+  border-radius: $border-radius-chip;
+  border: 1px solid $color-border;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  strong {
+    color: $color-dark;
+  }
+}
+
+.searchWrap {
+  position: relative;
+  min-width: 240px;
+
+  @include mobile {
+    width: 100%;
+  }
+}
+
+.searchInput {
+  width: 100%;
+  height: 38px;
+  padding: 0 14px 0 36px;
+  border-radius: $border-radius-chip;
+  border: 1px solid $color-border;
+  background: $color-surface;
+  font-family: $font-sans;
+  font-size: 13px;
+  color: $color-dark;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  box-sizing: border-box;
+
+  &:focus {
+    border-color: $color-rose-primary;
+    box-shadow: 0 0 0 3px rgba(216, 164, 169, 0.2);
+  }
+
+  &::placeholder {
+    color: $color-muted;
+  }
+}
+
+.searchIcon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: $color-muted;
+  pointer-events: none;
+}
+
+// ── Table Container ──────────────────────────────────────────────
+.tableWrapper {
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-card;
+  box-shadow: 0 2px 12px rgba(59, 42, 44, 0.04);
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.table {
+  width: 100%;
+  min-width: 650px;
+  border-collapse: collapse;
+  text-align: left;
+  font-family: $font-sans;
+
+  @include mobile {
+    min-width: 600px;
+  }
+}
+
+.thead {
+  background: $color-rose-lighter;
+  border-bottom: 1px solid $color-border;
+
+  th {
+    padding: 14px 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: $color-secondary-text;
+    white-space: nowrap;
+
+    @include mobile {
+      padding: 10px 12px;
+      font-size: 11px;
+    }
+  }
+}
+
+.tbody {
+  tr {
+    border-bottom: 1px solid rgba(232, 212, 215, 0.5);
+    transition: background 0.12s ease;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background: rgba(245, 218, 222, 0.18);
+    }
+  }
+
+  td {
+    padding: 16px 20px;
+    font-size: 14px;
+    color: $color-dark;
+    vertical-align: middle;
+
+    @include mobile {
+      padding: 12px 12px;
+      font-size: 13px;
+    }
+  }
+}
+
+// ── Service Cell ──────────────────────────────────────────────────
+.serviceCell {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.thumbnailWrap {
+  width: 54px;
+  height: 54px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: linear-gradient(135deg, $color-rose-lighter, $color-rose-light);
+  border: 1px solid rgba(216, 164, 169, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.thumbnailFallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: $color-rose-dark;
+}
+
+.serviceInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.serviceName {
+  font-size: 15px;
+  font-weight: 600;
+  color: $color-dark;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 320px;
+}
+
+.serviceCategory {
+  font-size: 12px;
+  color: $color-secondary-text;
+}
+
+.idBadge {
+  font-family: monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: $color-muted;
+  background: $color-rose-lighter;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(232, 212, 215, 0.8);
+}
+
+// ── Status toggle & badge ─────────────────────────────────────────
+.statusCell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.toggleSwitch {
+  width: 44px;
+  height: 24px;
+  border-radius: 12px;
+  background: #D1D5DB;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.2s ease;
+  padding: 0;
+
+  &:focus-visible {
+    outline: 2px solid $color-rose-primary;
+    outline-offset: 2px;
+  }
+}
+
+.toggleActive {
+  background: #10B981;
+}
+
+.toggleInactive {
+  background: #D1D5DB;
+}
+
+.toggleKnob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toggleActive .toggleKnob {
+  transform: translateX(20px);
+}
+
+.statusBadge {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 50px;
+  display: inline-block;
+}
+
+.badgeActive {
+  background: #ECFDF5;
+  color: #065F46;
+  border: 1px solid #A7F3D0;
+}
+
+.badgeInactive {
+  background: #F3F4F6;
+  color: #6B7280;
+  border: 1px solid #E5E7EB;
+}
+
+// ── Actions Cell ──────────────────────────────────────────────────
+.actionsCell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.actionBtn {
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: $color-dark;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: $color-rose-light;
+    border-color: $color-rose-primary;
+    color: $color-rose-deeper;
+  }
+}
+
+.actionBtnDanger {
+  color: #BE123C;
+  border-color: #FECDD3;
+
+  &:hover {
+    background: #FFF1F2;
+    border-color: #FB7185;
+    color: #9F1239;
+  }
+}
+
+// ── Mobile Cards Layout ───────────────────────────────────────────
+.mobileCardList {
+  display: none;
+
+  @include mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+  }
+}
+
+.mobileCard {
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-card;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 2px 8px rgba(59, 42, 44, 0.04);
+}
+
+.mobileCardTop {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mobileCardBody {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-top: 1px solid rgba(232, 212, 215, 0.5);
+  border-bottom: 1px solid rgba(232, 212, 215, 0.5);
+}
+
+.mobileCardActions {
+  display: flex;
+  gap: 8px;
+
+  button {
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+// ── Loading & Empty States ────────────────────────────────────────
+.loadingWrap {
+  padding: 48px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  color: $color-secondary-text;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid $color-rose-light;
+  border-top-color: $color-rose-primary;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.emptyState {
+  padding: 60px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.emptyIcon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: $color-rose-lighter;
+  color: $color-rose-primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.emptyTitle {
+  font-family: $font-serif;
+  font-size: 20px;
+  color: $color-dark;
+  margin: 0;
+}
+
+.emptyText {
+  font-family: $font-sans;
+  font-size: 14px;
+  color: $color-secondary-text;
+  max-width: 380px;
+  margin: 0;
+}
+
+.errorBox {
+  margin-bottom: 20px;
+  padding: 14px 18px;
+  background: #FFF1F2;
+  border: 1px solid #FECDD3;
+  border-radius: 10px;
+  color: #BE123C;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.retryBtn {
+  background: #BE123C;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    background: #9F1239;
+  }
+}
+
+// ── Delete Confirmation Dialog ────────────────────────────────────
+.confirmOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(59, 42, 44, 0.45);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  animation: fadeIn 0.18s ease-out;
+}
+
+.confirmModal {
+  background: $color-surface;
+  border-radius: $border-radius-card;
+  border: 1px solid $color-border;
+  box-shadow: 0 20px 40px rgba(59, 42, 44, 0.18);
+  width: 100%;
+  max-width: 440px;
+  padding: 28px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  animation: slideUp 0.2s ease-out;
+}
+
+.confirmIconWrap {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #FFF1F2;
+  color: #BE123C;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.confirmTitle {
+  font-family: $font-serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: $color-dark;
+  margin: 0;
+}
+
+.confirmText {
+  font-family: $font-sans;
+  font-size: 14px;
+  color: $color-secondary-text;
+  line-height: 1.5;
+  margin: 0;
+
+  strong {
+    color: $color-dark;
+  }
+}
+
+.confirmActions {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  margin-top: 10px;
+
+  button {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+}
+
+.confirmCancelBtn {
+  background: none;
+  border: 1px solid $color-border;
+  color: $color-secondary-text;
+
+  &:hover {
+    background: $color-rose-lighter;
+    color: $color-dark;
+  }
+}
+
+.confirmDeleteBtn {
+  background: #BE123C;
+  border: none;
+  color: #FFFFFF;
+
+  &:hover:not(:disabled) {
+    background: #9F1239;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
